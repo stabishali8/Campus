@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import './App.css'
 
 const style = {
   height: 300,
@@ -19,13 +19,17 @@ const styling = {
 
 const PaperExampleSimple = () => (
     <div>
+      <div className="header">Campus Recuirtment System</div>
         <Paper style={style} zDepth={3}>
             <br/>
-            <br/>
             <TextField hintText="User Name" />
-            <TextField hintText="Email" type="email"/>
-            <TextField hintText="Password" type="password"/>
             <br/>
+            <br/>
+            <TextField hintText="Email" type="email"/>
+            <br/>
+            <br/>
+            <TextField hintText="Password" type="password"/>
+            <br/><br/>
             <RaisedButton label="Sign up" primary={true} style={styling} />
 
        </Paper>

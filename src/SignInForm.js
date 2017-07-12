@@ -23,7 +23,7 @@ const styles = {
 
 const LoginForm = () => (
     <div>
-        <div className="header">Campus Recuirement System</div>
+        <div className="header">Campus Recruitment System</div>
         <Paper style={style} zDepth={3}>
             <br/>
             <h2>Sign in </h2>
