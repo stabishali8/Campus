@@ -22,3 +22,13 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.header{
+    height: 64px;
+    width: 100%;
+    background:rgba(0,188,212,1);
+    text-align: center;
+    font-size: 50px;
+    color: mintcream;
+    font-style: initial;
+}

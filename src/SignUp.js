@@ -1,11 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import PaperExampleSimple from './SignUpForm';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class SignUp extends Component{
+
+export class SignUp extends Component{
     render(){
         return(
             <div>
-                hello world
+                <MuiThemeProvider>
+                        <PaperExampleSimple/>
+                </MuiThemeProvider>
             </div>
         );
     }
