@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import {SignIn} from './SignIn';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import 
+import MyAwesomeReactComponent from './MyAwesomeReactComponent';
+ 
 
 class App extends Component {
   render() {
@@ -13,7 +14,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>*/}
-        
+          <MuiThemeProvider>
+              <MyAwesomeReactComponent />
+          </MuiThemeProvider>
         {/*<SignIn/>*/}
       </div>
     );
