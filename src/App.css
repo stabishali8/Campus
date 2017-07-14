@@ -32,3 +32,27 @@
     color: mintcream;
     font-style: initial;
 }
+
+.heading2{
+    color: rgba(0,188,212,1);
+}
+
+.heading3{
+    color: rgba(0,188,212,1);
+}
+
+.headingProfile{
+    color: rgba(0,188,212,1);
+    margin-top: -10px;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hr{
+    margin-bottom: 55px;
+    margin-top: 30px;
+}
+.subheading{
+    margin-bottom: -10px;
+    margin-left: -240px;
+}
