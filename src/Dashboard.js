@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-import {browserHistory, Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
@@ -24,7 +24,7 @@ export class Dashboard extends Component{
       <div>
         <MuiThemeProvider>
           <div>
-            <div className="header">Campus Recuirtment System</div>
+            <div className="header">Campus Recruitment System</div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>   
               <h2 className="heading2">Personal Profile</h2>

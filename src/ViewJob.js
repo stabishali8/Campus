@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import './App.css'
 
 const style = {

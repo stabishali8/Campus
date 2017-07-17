@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import './App.css'
 
 const style = {
@@ -32,7 +32,6 @@ export class SignUp extends Component{
     }
     justSubmit(e){
         let val = JSON.parse(localStorage.getItem('students'))
-
         let arr = val == null ? [] : val;
         this.state.username  = this.state.username.toLocaleLowerCase();
         arr.push(this.state);

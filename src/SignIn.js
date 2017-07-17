@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory, Link} from 'react-router';
+// import {Link} from 'react-router-dom';
 import './App.css'
 
 const style = {
@@ -38,7 +38,7 @@ export class SignIn extends Component{
 
             if(index >= 0 && arr[index].password === this.state.password){
                 console.log("True");
-                browserHistory.push('/dashboard');
+                this.props.history.push('/dashboard');
             }
             else {
                     alert("Incorrect username or password");
@@ -76,7 +76,9 @@ export class SignIn extends Component{
                                 <br/>
                                 <RaisedButton label="Sign in" onClick={this.justSubmit.bind(this)} primary={true} style={styling} />
                                 {/*<RaisedButton label="Sign up"  primary={true} style={styles} />*/}
-                                <Link to="signup"><RaisedButton label="Sign up"  primary={true} style={styles} /></Link>
+                                {/*<Link to="signup">*/}
+                                <RaisedButton label="Sign up"  primary={true} style={styles} />
+                                {/*</Link>*/}
 
                                 <br/>
 
