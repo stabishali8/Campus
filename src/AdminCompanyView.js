@@ -16,7 +16,7 @@ const style = {
 };
 
 
-export class ViewCompany extends Component{
+export class AdminCompanyView extends Component{
         constructor()
         {
             super();
@@ -47,19 +47,40 @@ export class ViewCompany extends Component{
                         var cell1 = row.insertCell(1);
                         cell0.innerHTML = this.state.username[i];
                         cell1.innerHTML = this.state.email[i];
+                        var cell2 = row.insertCell(2);
+                        cell0.innerHTML = this.state.username[i];
+                        cell1.innerHTML = this.state.email[i];
+                        var button = document.createElement('button');
+                        var buttonText = document.createTextNode('Delete');
+                        button.appendChild(buttonText);
+                        cell2.appendChild(button);
+                        button.addEventListener('click',this.deleteUser.bind(this,k,rootRef));                        
+                        
                     }
                 }
             })
         }
+        deleteUser(deletekey,rootRef)
+        {
+            // rootRef.on('value',snap=>{
+            //     snap.ref(deletekey).remove();
+            // })
+                 console.log("delete "+deletekey)
+                    firebase.database().ref().child('USER/'+deletekey).remove();
+                    // firebase.database().ref().child('Apply/'+deletekey).remove();
+                // firebase.database().ref('JOBS/'+deletekey).remove();
+        }
+
         render(){
             return(
                 <div>
-                    <div className="header">Campus Recuirtment System
-                        <Link to="/dashboard"><button>Dashboard</button>
-                        </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>              
-
+                    <div className="header">Campus Recruitment System
+                    <Link to="/admindashboard"><button>Dashboard</button>
+                    </Link>
+                    <Link to="/signin"><button>SignOut</button></Link>
                     </div>
+                    {/*<Link to="signin"><RaisedButton label="SignOut"  primary={true} /></Link>*/}
+
                     <p>
                         <table id="TableShow">
                             <tr>
@@ -69,6 +90,8 @@ export class ViewCompany extends Component{
 
                         </table>
                     </p>
+                    {/*<Link to="signin"><RaisedButton label="SignOut"  primary={true} /></Link>*/}
+
                     {/*<MuiThemeProvider>
                         <div>
                             <div className="header">Campus Recruitment System</div>

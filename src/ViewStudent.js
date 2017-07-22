@@ -16,7 +16,7 @@ const style = {
 };
 
 
-export class ViewCompany extends Component{
+export class ViewStudent extends Component{
         constructor()
         {
             super();
@@ -35,7 +35,7 @@ export class ViewCompany extends Component{
                 for(var i=0; i<objKey.length;i++)
                 {
                     var k=objKey[i];
-                    if(userObj[k].type==='company')
+                    if(userObj[k].type==='student')
                     {
                         this.state.username[i] = userObj[k].name;
                         this.state.email[i] = userObj[k].email;
@@ -54,17 +54,16 @@ export class ViewCompany extends Component{
         render(){
             return(
                 <div>
-                    <div className="header">Campus Recuirtment System
-                        <Link to="/dashboard"><button>Dashboard</button>
+                    <div className="header">Campus Recruitment System
+                        <Link to="/companydashboard"><button>Dashboard</button>
                         </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>              
-
+                        <Link to="/signin"><button>Sign Out</button></Link>                                      
                     </div>
                     <p>
                         <table id="TableShow">
                             <tr>
-                                <th>Company Name</th>
-                                <th>Company Email</th>
+                                <th>Student Name</th>
+                                <th>Student Email</th>
                             </tr>
 
                         </table>

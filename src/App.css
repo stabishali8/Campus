@@ -48,11 +48,15 @@
     margin-bottom: 10px;
 }
 
-.hr{
-    margin-bottom: 55px;
-    margin-top: 30px;
-}
 .subheading{
-    margin-bottom: -10px;
-    margin-left: -240px;
+    margin-bottom: initial;
+    margin-left: initial;
+}
+
+.logout{
+    margin-right: 50px;
+}
+
+.buttonspace{
+    margin-right: 10px; 
 }

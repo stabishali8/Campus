@@ -14,13 +14,13 @@ const style = {
   display: 'inline-block',
 };
 
-export class ViewProfile extends Component{
+export class CompanyViewProfile extends Component{
         constructor(){
             super();
             this.state = {
                     email:'',
-                    education:'',
-                    skills:'',
+                    companyname:'',
+                    address:'',
                     description:''
             }
         }
@@ -32,9 +32,9 @@ export class ViewProfile extends Component{
             // userobj = snap.val();
             this.setState({
                 email:snap.val().email,
-                education:snap.val().Education,
-                skills:snap.val().Skills,
-                description:snap.val().Description
+                companyname:snap.val().companyname,
+                address:snap.val().address,
+                description:snap.val().description
             })
             // alert(this.state.user+" User");
             })  
@@ -50,9 +50,9 @@ export class ViewProfile extends Component{
                     <MuiThemeProvider>
                         <div>
                             <div className="header">Campus Recruitment System
-                        <Link to="/dashboard"><button>Dashboard</button>
-                        </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>                                              
+                                <Link to="/companydashboard"><button>Dashboard</button>
+                                </Link>
+                                <Link to="/signin"><button>Sign Out</button></Link>                                              
                             </div>
                             <Paper style={style} zDepth={3}>
                                 <br/>
@@ -61,12 +61,12 @@ export class ViewProfile extends Component{
                                         {/*var items = this.returnData().map((elem,i) => {
             return <li key={i}><span>{elem}</span></li>
         });*/}
-                                <h3 className="subheading">Education:{this.state.education}</h3>
+                                <h3 className="subheading">Company Name:{this.state.companyname}</h3>
                                 <h3 className="subheading">Email:{this.state.email}</h3>
-                                <h3 className="subheading">Skills:{this.state.skills}</h3>   
+                                <h3 className="subheading">Address:{this.state.address}</h3>   
                                 <h3 className="subheading">Description:{this.state.description}</h3>
                                 <hr className="hr"/>
-                                <Link to="/dashboard"><RaisedButton 
+                                <Link to="/companydashboard"><RaisedButton 
                                 label="Dashboard"  
                                 primary={true} /></Link>
                                 <br/>

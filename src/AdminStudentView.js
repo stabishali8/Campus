@@ -16,7 +16,7 @@ const style = {
 };
 
 
-export class ViewCompany extends Component{
+export class AdminStudentView extends Component{
         constructor()
         {
             super();
@@ -25,8 +25,8 @@ export class ViewCompany extends Component{
                 email:[]
             }
         }
-        componentDidMount()
-        {
+    componentDidMount()
+    {
             const rootRef = firebase.database().ref().child('USER/');
             rootRef.on('value',snap=>{
                 var userObj = snap.val();
@@ -35,7 +35,7 @@ export class ViewCompany extends Component{
                 for(var i=0; i<objKey.length;i++)
                 {
                     var k=objKey[i];
-                    if(userObj[k].type==='company')
+                    if(userObj[k].type==='student')
                     {
                         this.state.username[i] = userObj[k].name;
                         this.state.email[i] = userObj[k].email;
@@ -45,26 +45,41 @@ export class ViewCompany extends Component{
                         var row = table.insertRow(1);
                         var cell0 = row.insertCell(0);
                         var cell1 = row.insertCell(1);
+                        var cell2 = row.insertCell(2);
                         cell0.innerHTML = this.state.username[i];
                         cell1.innerHTML = this.state.email[i];
+                        var button = document.createElement('button');
+                        var buttonText = document.createTextNode('Delete');
+                        button.appendChild(buttonText);
+                        cell2.appendChild(button);
+                        button.addEventListener('click',this.deleteUser.bind(this,k,rootRef));                        
                     }
                 }
             })
         }
+        deleteUser(deletekey,rootRef)
+        {
+            // rootRef.on('value',snap=>{
+            //     snap.ref(deletekey).remove();
+            // })
+                // console.log("delete "+deletekey)
+                    firebase.database().ref().child('USER/'+deletekey).remove();
+                    // firebase.database().ref().child('Apply/'+deletekey).remove();
+                // firebase.database().ref('JOBS/'+deletekey).remove();
+        }
         render(){
             return(
                 <div>
-                    <div className="header">Campus Recuirtment System
-                        <Link to="/dashboard"><button>Dashboard</button>
-                        </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>              
-
+                    <div className="header">Campus Recruitment System
+                    <Link to="/admindashboard"><button>Dashboard</button>
+                    </Link>
+                    <Link to="/signin"><button>SignOut</button></Link>
                     </div>
                     <p>
                         <table id="TableShow">
                             <tr>
-                                <th>Company Name</th>
-                                <th>Company Email</th>
+                                <th>Student Name</th>
+                                <th>Student Email</th>
                             </tr>
 
                         </table>

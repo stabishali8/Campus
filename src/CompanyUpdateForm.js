@@ -14,13 +14,13 @@ const style = {
   display: 'inline-block',
 };
 
-export class UpdateForm extends Component{
+export class CompanyUpdateForm extends Component{
   constructor(props){
         super(props);
         this.state = {
             user:'',
-            education : '',
-            skills : '',
+            companyname : '',
+            address : '',
             description : ''
         }
     }
@@ -52,15 +52,16 @@ export class UpdateForm extends Component{
         var userId = firebase.auth().currentUser.uid;
         firebase.database().ref('USER'+'/'+userId).set({
           ...this.state.user,
-          Education: this.state.education,
-          Skills: this.state.skills,
-          Description:this.state.description
+          companyname: this.state.companyname,
+          address: this.state.address,
+          description:this.state.description
         }).then(function(){
             alert("Update successful");
         }, function(error){
           alert("Update unsuccessful");
         });
-        
+        debugger;
+        this.props.history.push('/CompanyDashboard');
         // firebase.database().ref('USER'+'/'+userId).
         // userId.updateProfile({
         //   Education: this.state.education,
@@ -89,10 +90,9 @@ export class UpdateForm extends Component{
         <MuiThemeProvider>
           <div>
             <div className="header">Campus Recuirtment System
-                    <Link to="/dashboard"><button>Dashboard</button>
+                    <Link to="/companydashboard"><button>Dashboard</button>
                     </Link>
                     <Link to="/signin"><button>SignOut</button></Link>              
-
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>   
@@ -100,16 +100,16 @@ export class UpdateForm extends Component{
               <hr/>
               <hr/>
                 <TextField
-                hintText = "Education" 
+                hintText = "Company Name" 
                 onChange={this._inputHandler.bind(this)}
-                value = {this.state.education}
-                name="education" />
+                value = {this.state.companyname}
+                name="companyname" />
                 <br/>
                 <TextField
-                hintText = "Skills" 
+                hintText = "Address" 
                 onChange={this._inputHandler.bind(this)}
-                value = {this.state.skills}
-                name="skills" />
+                value = {this.state.address}
+                name="address" />
                 <br/>
                 <TextField
                 hintText = "Description" 

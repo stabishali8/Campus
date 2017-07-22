@@ -1,0 +1,28 @@
+#TableShow{
+    width: 40%;
+    margin: auto;
+}
+
+tr{
+   height: 50px;
+   background-color:rgba(0,188,212,1);
+   width: 40%;
+   color: white;
+}
+th {
+    background-color: rgba(0,188,212,1);
+    color: white;
+    height: 50px;
+    padding-right: 100px;
+    padding-left: 100px
+}
+
+td
+{
+    margin: auto;
+    align-content: center;
+    text-align: -webkit-center;
+    font-size: x-large;
+    font-weight: bolder;
+    font-style: oblique;
+}

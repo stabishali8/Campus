@@ -6,14 +6,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
 
 const style = {
-  height: 365,
+  height: 420,
   width: 260,
   margin: 50,
   textAlign: 'center',
   display: 'block',
 };
 
-export class Dashboard extends Component{
+export class CompanyDashboard extends Component{
   // changeRoute(){
     
   //   console.log('Browser', browserHistory);
@@ -25,7 +25,7 @@ export class Dashboard extends Component{
         <MuiThemeProvider>
           <div>
             <div className="header">Campus Recruitment System
-                    <Link to="/signin"><button>Sign Out</button></Link>              
+                    <Link to="/signin"><button>SignOut</button></Link>
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>
@@ -34,13 +34,15 @@ export class Dashboard extends Component{
               </div>   
               <hr/>
               <hr/>
-              <Link to="updateform"><FlatButton label="Update Profile" primary={true} /></Link>
+              <Link to="companyupdateform"><FlatButton label="Update Profile" primary={true} /></Link>
               <hr/>
-              <Link to="viewprofile"><FlatButton label="View Profile" primary={true} /></Link>
+              <Link to="companyviewprofile"><FlatButton label="View Profile" primary={true} /></Link>
               <hr/>
-              <Link to="viewjob"><FlatButton label="View Jobs" primary={true} /></Link>
+              <Link to="companypostjob"><FlatButton label="Post a Job" primary={true} /></Link>
               <hr/>
-              <Link to="viewcompany"><FlatButton label="View Company" primary={true} /></Link>
+              <Link to="viewpostjob"><FlatButton label="View Post Job" primary={true} /></Link>
+              <hr/>
+              <Link to="viewstudent"><FlatButton label="View Student" primary={true} /></Link>
               <hr/>
               <Link to="signin"><FlatButton label="SignOut"  primary={true} /></Link>
               {/*<FlatButton label="SignOut" onClick={this.changeRoute.bind(this)} primary={true} />*/}

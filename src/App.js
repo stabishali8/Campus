@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import {SignIn} from './SignIn';
-import {ViewProfile} from './ViewProfile';
 import * as firebase from 'firebase'; 
 
 class App extends Component {
@@ -24,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         {/*<h1>{this.state.username}</h1>*/}
-        <SignIn/>
+        <SignIn {...this.props}/>
       </div>
     );
   }

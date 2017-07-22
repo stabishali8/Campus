@@ -16,7 +16,7 @@ const style = {
 };
 
 
-export class ViewJob extends Component{
+export class AdminJobView extends Component{
     constructor(){
         super();
         this.state={
@@ -24,14 +24,18 @@ export class ViewJob extends Component{
             salary:[],
             description:[],
             email:[],
-            key:[]
+            key:[],
+            job:""
         }
     }
     componentDidMount(){
-        var uid = firebase.auth().currentUser.uid;
+        // var uid = firebase.auth().currentUser.uid;
         const rootRef = firebase.database().ref().child('JOBS/');
         rootRef.on('value',snap =>{
             var userObj = snap.val();
+            this.setState({
+                    job:snap.val()
+            })
             var key=Object.keys(userObj);
             var table = document.createElement('table');
             for(var i=0;i<key.length;i++){
@@ -52,38 +56,61 @@ export class ViewJob extends Component{
                 cell2.innerHTML = this.state.description[i];
                 cell3.innerHTML = this.state.email[i];
                 var button = document.createElement('button');
-                var buttonText = document.createTextNode('Apply');
+                var buttonText = document.createTextNode('Delete');
                 button.appendChild(buttonText);
                 cell4.appendChild(button);
-                button.addEventListener('click',this.ApplyUser.bind(this,i,k));
+                button.addEventListener('click',this.deleteUser.bind(this,i,k));
             }
 
         })
 
     }
-    ApplyUser(index,key){
-        var userId = firebase.auth().currentUser.uid;
-        const rootRef = firebase.database().ref().child('USER/'+userId);
-        rootRef.on('value', snap => {
-            var user = snap.val();
-            let userData = (snap.val() || {
-                userid:userId,
-                name: user.name,
-                email:user.email
-            });
-            // console.log("userID"+ user.name);
-            var rootRefernce=firebase.database().ref();
-            const anoRootRef = rootRefernce.child('Apply/'+key).push(userData);
-            alert("Thank You")  
-        })
-    }
+    deleteUser(deletekey,rootRef)
+    {
+        // rootRef.on('value',snap=>{
+        //     snap.ref(deletekey).remove();
+        // })
+            // console.log("delete "+deletekey)
+                firebase.database().ref().child('JOBS/'+deletekey).remove();
+                // firebase.database().ref().child('Apply/'+deletekey).remove();
+            // firebase.database().ref('JOBS/'+deletekey).remove();
+    }    
+    // ApplyUser(index,key){
+    //     var userId = firebase.auth().currentUser.uid;
+    //     const rootRef = firebase.database().ref().child('USER/'+userId);
+    //     rootRef.on('value', snap => {
+    //         var user = snap.val();
+    //         let userData = (snap.val() || {
+    //             userid:userId,
+    //             name: user.name,
+    //             email:user.email
+    //         });
+    //         // console.log("userID"+ user.name);
+    //         var rootRefernce=firebase.database().ref();
+    //         const anoRootRef = rootRefernce.child('Apply/'+key).push(userData);
+    //         alert("Thank You")  
+    //     })
+    // }
     render(){
+            // const jobs = Object.keys(this.state.job).map((key)=>{
+            //     return(                
+            //     <div>   
+            //         <p>JobTitle:{this.state.job[key].jobtitle}</p>
+            //         <p>JobTitle:{this.state.job[key].salary}</p>
+            //         <p>JobTitle:{this.state.job[key].description}</p>
+            //            <button onClick={this.remove.bind(this,key)}></button>                    
+            //     </div>
+            //     )
+
+                
+            // })
+
             return(
                 <div>
                     <div className="header">Campus Recruitment System
-                        <Link to="/dashboard"><button>Dashboard</button>
-                        </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>                                      
+                    <Link to="/admindashboard"><button>Dashboard</button>
+                    </Link>
+                    <Link to="/signin"><button>SignOut</button></Link>
                     </div>
         {/*<p>*/}
                 <table id="TableShow">

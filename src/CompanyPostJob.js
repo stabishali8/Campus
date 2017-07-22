@@ -14,13 +14,13 @@ const style = {
   display: 'inline-block',
 };
 
-export class UpdateForm extends Component{
+export class CompanyPostJob extends Component{
   constructor(props){
         super(props);
         this.state = {
             user:'',
-            education : '',
-            skills : '',
+            jobtitle : '',
+            salary : '',
             description : ''
         }
     }
@@ -50,16 +50,17 @@ export class UpdateForm extends Component{
   justSubmit(e){
 
         var userId = firebase.auth().currentUser.uid;
-        firebase.database().ref('USER'+'/'+userId).set({
+        firebase.database().ref('JOBS/').push({
           ...this.state.user,
-          Education: this.state.education,
-          Skills: this.state.skills,
-          Description:this.state.description
+          jobtitle: this.state.jobtitle,
+          salary: this.state.salary,
+          description:this.state.description
         }).then(function(){
             alert("Update successful");
         }, function(error){
           alert("Update unsuccessful");
         });
+        this.props.history.push('/companydashboard');
         
         // firebase.database().ref('USER'+'/'+userId).
         // userId.updateProfile({
@@ -89,27 +90,26 @@ export class UpdateForm extends Component{
         <MuiThemeProvider>
           <div>
             <div className="header">Campus Recuirtment System
-                    <Link to="/dashboard"><button>Dashboard</button>
+                    <Link to="/companydashboard"><button>Dashboard</button>
                     </Link>
-                    <Link to="/signin"><button>SignOut</button></Link>              
-
+                    <Link to="/signin"><button>SignOut</button></Link>
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>   
-              <h2 className="heading3">Update Profile</h2>
+              <h2 className="heading3">Post Job</h2>
               <hr/>
               <hr/>
                 <TextField
-                hintText = "Education" 
+                hintText = "Job Title" 
                 onChange={this._inputHandler.bind(this)}
-                value = {this.state.education}
-                name="education" />
+                value = {this.state.jobtitle}
+                name="jobtitle" />
                 <br/>
                 <TextField
-                hintText = "Skills" 
+                hintText = "Salary" 
                 onChange={this._inputHandler.bind(this)}
-                value = {this.state.skills}
-                name="skills" />
+                value = {this.state.salary}
+                name="salary" />
                 <br/>
                 <TextField
                 hintText = "Description" 
@@ -122,12 +122,12 @@ export class UpdateForm extends Component{
                  />
                  <br/><br/>
                 {/*<Link to="/Dashboard">*/}
-                <RaisedButton label="Update" 
+                <RaisedButton label="Post" 
                 onClick={this.justSubmit.bind(this)}
                 primary={true}
                 />
-                <Link to="/signin"><RaisedButton className="buttonspace"
-                label="Sign Out"  
+                <Link to="/companydashboard"><RaisedButton className="buttonspace"
+                label="Dashboard"  
                 primary={true} /></Link>
                 
                 {/*</Link> */}

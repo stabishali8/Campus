@@ -16,27 +16,30 @@ const style = {
 };
 
 
-export class ViewJob extends Component{
+export class ViewPostJob extends Component{
     constructor(){
         super();
         this.state={
             jobtitle:[],
             salary:[],
-            description:[],
-            email:[],
-            key:[]
+            description:[]
         }
     }
     componentDidMount(){
-        var uid = firebase.auth().currentUser.uid;
+        var currentuseremail = firebase.auth().currentUser.email;
+        console.log("Email: "+currentuseremail);
+        // const userRef = firebase.database().ref().child('USER/');
         const rootRef = firebase.database().ref().child('JOBS/');
         rootRef.on('value',snap =>{
             var userObj = snap.val();
             var key=Object.keys(userObj);
+            // if(key!=null)
+            // {}
             var table = document.createElement('table');
             for(var i=0;i<key.length;i++){
                 var k = key[i];
-                this.state.email[i]=userObj[k].email;
+                if(currentuseremail===userObj[k].email)
+                {
                 this.state.jobtitle[i]=userObj[k].jobtitle;
                 this.state.salary[i]=userObj[k].salary;
                 this.state.description[i]=userObj[k].description;
@@ -46,21 +49,33 @@ export class ViewJob extends Component{
                 var cell1 = row.insertCell(1);
                 var cell2 = row.insertCell(2);
                 var cell3 = row.insertCell(3);
-                var cell4 = row.insertCell(4);
                 cell0.innerHTML = this.state.jobtitle[i];
                 cell1.innerHTML = this.state.salary[i];
                 cell2.innerHTML = this.state.description[i];
-                cell3.innerHTML = this.state.email[i];
+                // cell3.innerHTML = this.state.email[i];
                 var button = document.createElement('button');
-                var buttonText = document.createTextNode('Apply');
+                var buttonText = document.createTextNode('Delete');
                 button.appendChild(buttonText);
-                cell4.appendChild(button);
-                button.addEventListener('click',this.ApplyUser.bind(this,i,k));
+                cell3.appendChild(button);
+                button.addEventListener('click',this.deleteUser.bind(this,k,rootRef));
+                }
             }
 
         })
 
     }
+
+    deleteUser(deletekey,rootRef)
+    {
+        // rootRef.on('value',snap=>{
+        //     snap.ref(deletekey).remove();
+        // })
+            // console.log("delete "+deletekey)
+                firebase.database().ref('JOBS/'+deletekey).remove();
+                // firebase.database().ref().child('Apply/'+deletekey).remove();
+            // firebase.database().ref('JOBS/'+deletekey).remove();
+    }
+
     ApplyUser(index,key){
         var userId = firebase.auth().currentUser.uid;
         const rootRef = firebase.database().ref().child('USER/'+userId);
@@ -81,18 +96,17 @@ export class ViewJob extends Component{
             return(
                 <div>
                     <div className="header">Campus Recruitment System
-                        <Link to="/dashboard"><button>Dashboard</button>
+                        <Link to="/companydashboard"><button>Dashboard</button>
                         </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>                                      
+                        <Link to="/signin"><button>Sign Out</button></Link>              
                     </div>
         {/*<p>*/}
                 <table id="TableShow">
                    <tr>
                     
                         <th>Job Title</th>
-                        <th>Description </th>
-                        <th>Salary</th>
-                        <th>Email</th>        
+                        <th>Salary </th>
+                        <th>Description</th>
                     </tr>
          
                 </table>
