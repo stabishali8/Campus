@@ -60,7 +60,7 @@ export class UpdateForm extends Component{
         }, function(error){
           alert("Update unsuccessful");
         });
-        
+        database
         // firebase.database().ref('USER'+'/'+userId).
         // userId.updateProfile({
         //   Education: this.state.education,
