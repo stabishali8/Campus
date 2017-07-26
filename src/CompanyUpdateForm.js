@@ -42,6 +42,14 @@ export class CompanyUpdateForm extends Component{
       // alert(this.state.user+" User");
     })  
   }
+  logout(){
+    firebase.auth().signOut().catch(function(error){
+        console.log("error "+error.message);
+    }).then(()=>{
+      console.log("success");
+      this.props.history.push('/signin')
+    });
+  }
   _inputHandler(e){
     let userInput = {};
         userInput[e.target.name] = e.target.value;
@@ -50,7 +58,7 @@ export class CompanyUpdateForm extends Component{
   justSubmit(e){
 
         var userId = firebase.auth().currentUser.uid;
-        firebase.database().ref('USER'+'/'+userId).set({
+        firebase.database().ref('USER/'+userId).set({
           ...this.state.user,
           companyname: this.state.companyname,
           address: this.state.address,
@@ -92,7 +100,9 @@ export class CompanyUpdateForm extends Component{
             <div className="header">Campus Recuirtment System
                     <Link to="/companydashboard"><button>Dashboard</button>
                     </Link>
-                    <Link to="/signin"><button>SignOut</button></Link>              
+                    <button
+                    onClick={this.logout.bind(this)}                     
+                    >SignOut</button>              
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>   
@@ -126,9 +136,10 @@ export class CompanyUpdateForm extends Component{
                 onClick={this.justSubmit.bind(this)}
                 primary={true}
                 />
-                <Link to="/signin"><RaisedButton className="buttonspace"
-                label="Sign Out"  
-                primary={true} /></Link>
+                <RaisedButton className="buttonspace"
+                label="Sign Out" 
+                onClick={this.logout.bind(this)}  
+                primary={true} />
                 
                 {/*</Link> */}
               {/*<Link to="signin"><FlatButton label="SignOut"  primary={true} /></Link>*/}

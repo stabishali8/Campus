@@ -49,7 +49,7 @@ export class CompanyPostJob extends Component{
     }
   justSubmit(e){
 
-        var userId = firebase.auth().currentUser.uid;
+        // var userId = firebase.auth().currentUser.uid;
         firebase.database().ref('JOBS/').push({
           ...this.state.user,
           jobtitle: this.state.jobtitle,
@@ -84,6 +84,14 @@ export class CompanyPostJob extends Component{
         // }
         // this.setState(this.state);
     }
+    logout(){
+    firebase.auth().signOut().catch(function(error){
+        console.log("error "+error.message);
+    }).then(()=>{
+      console.log("success");
+      this.props.history.push('/signin')
+    });
+    }  
   render(){
     return(
       <div>
@@ -92,7 +100,9 @@ export class CompanyPostJob extends Component{
             <div className="header">Campus Recuirtment System
                     <Link to="/companydashboard"><button>Dashboard</button>
                     </Link>
-                    <Link to="/signin"><button>SignOut</button></Link>
+                    <button
+                onClick={this.logout.bind(this)}                     
+                    >SignOut</button>
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>   

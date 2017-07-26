@@ -26,3 +26,28 @@ td
     font-weight: bolder;
     font-style: oblique;
 }
+
+.jobview{
+    background: white;
+    border: 2px solid rgba(0,188,212,1);
+    border-radius: 50px;
+    height: initial;
+    width: 40%;
+    text-align: center;
+    margin: auto;
+    position: relative;
+
+}
+
+.jobviewheading{
+    color: rgba(0,188,212,1);
+    font-style: normal;
+    font-size: x-large;
+}
+
+.jobviewbutton{
+    height: 25px;
+    width: initial;
+    background: aliceblue;
+    font-size: large;
+}

@@ -4,10 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as firebase from 'firebase';
-import { Route , withRouter} from 'react-router-dom';
-import { browserHistory,hashHistory } from 'history';
 import {Link} from 'react-router-dom';
-import signup from './SignUp';
 import './App.css'
 
 const style = {

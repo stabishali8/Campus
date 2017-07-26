@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+// import Paper from 'material-ui/Paper';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom';
 import * as firebase from 'firebase';
 import './ViewCompany.css';
 import './App.css';
 
-const style = {
-  height: 370,
-  width: 400,
-  margin: 70,
-  textAlign: 'center',
-  display: 'inline-block',
-};
+// const style = {
+//   height: 370,
+//   width: 400,
+//   margin: 70,
+//   textAlign: 'center',
+//   display: 'inline-block',
+// };
 
 
 export class ViewStudent extends Component{
@@ -22,52 +22,79 @@ export class ViewStudent extends Component{
             super();
             this.state = {
                 username:[],
-                email:[]
+                email:[],
+                student:''
             }
         }
+        logout(){
+            firebase.auth().signOut().catch(function(error){
+                console.log("error "+error.message);
+            }).then(()=>{
+            console.log("success");
+            this.props.history.push('/signin')
+            });
+        }
+        
         componentDidMount()
         {
             const rootRef = firebase.database().ref().child('USER/');
-            rootRef.on('value',snap=>{
-                var userObj = snap.val();
-                var objKey=Object.keys(userObj);
-                var table = document.createElement('table');
-                for(var i=0; i<objKey.length;i++)
-                {
-                    var k=objKey[i];
-                    if(userObj[k].type==='student')
-                    {
-                        this.state.username[i] = userObj[k].name;
-                        this.state.email[i] = userObj[k].email;
-                        console.log("Company Name"+this.state.username[i]);
-                        console.log("Company Name"+this.state.email[i]);
-                        var table = document.getElementById("TableShow");
-                        var row = table.insertRow(1);
-                        var cell0 = row.insertCell(0);
-                        var cell1 = row.insertCell(1);
-                        cell0.innerHTML = this.state.username[i];
-                        cell1.innerHTML = this.state.email[i];
-                    }
-                }
+            rootRef.orderByChild('type').equalTo('student').on('value',snap=>{
+                // var userObj = snap.val();
+                    this.setState({
+                        student:snap.val()
+                    })
+                // var objKey=Object.keys(userObj);
+                // var table = document.createElement('table');
+                // for(var i=0; i<objKey.length;i++)
+                // {
+                //     var k=objKey[i];
+                //     if(userObj[k].type==='student')
+                //     {
+                //         this.state.username[i] = userObj[k].name;
+                //         this.state.email[i] = userObj[k].email;
+                //         console.log("Company Name"+this.state.username[i]);
+                //         console.log("Company Name"+this.state.email[i]);
+                //         var table = document.getElementById("TableShow");
+                //         var row = table.insertRow(1);
+                //         var cell0 = row.insertCell(0);
+                //         var cell1 = row.insertCell(1);
+                //         cell0.innerHTML = this.state.username[i];
+                //         cell1.innerHTML = this.state.email[i];
+                //     }
+                // }
             })
         }
         render(){
+
+            let jobs = '';
+            if(this.state.student!=null)
+            {
+            jobs = Object.keys(this.state.student).map((key)=>{
+                return(                
+                <div className="jobview">   
+                    <p className="jobviewheading">Student Name:   {this.state.student[key].name}</p> 
+                    <p className="jobviewheading">Email:   {this.state.student[key].email}</p>
+                    {/*<p className="jobviewheading">Description:   {this.state.job[key].description}</p>*/}
+                       {/*<button className="jobviewbutton" onClick={this.Delete.bind(this,key)}>Delete</button>                    */}
+                </div>
+                )
+
+                
+            })
+            }
+
             return(
                 <div>
                     <div className="header">Campus Recruitment System
                         <Link to="/companydashboard"><button>Dashboard</button>
                         </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>                                      
+                        <button
+                        onClick={this.logout.bind(this)}
+                        >Sign Out</button>                                      
                     </div>
-                    <p>
-                        <table id="TableShow">
-                            <tr>
-                                <th>Student Name</th>
-                                <th>Student Email</th>
-                            </tr>
-
-                        </table>
-                    </p>
+                    <br/>
+                    {jobs !== '' ? jobs : <span></span>}
+                    <br/>
                     {/*<MuiThemeProvider>
                         <div>
                             <div className="header">Campus Recruitment System</div>

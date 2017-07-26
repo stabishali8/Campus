@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
+import * as firebase from 'firebase';
 
 const style = {
   height: 420,
@@ -19,13 +20,23 @@ export class CompanyDashboard extends Component{
   //   console.log('Browser', browserHistory);
   //   // browserHistory.transitionTo(null, '/signin');
   // }
+  logout(){
+    firebase.auth().signOut().catch(function(error){
+        console.log("error "+error.message);
+    }).then(()=>{
+      console.log("success");
+      this.props.history.push('/signin')
+    });
+  }
   render(){
     return(
       <div>
         <MuiThemeProvider>
           <div>
             <div className="header">Campus Recruitment System
-                    <Link to="/signin"><button>SignOut</button></Link>
+                <button
+                onClick={this.logout.bind(this)}                 
+                >SignOut</button>
             </div>
             <Paper style={style} zDepth={2} rounded={false}>
               <br/>
@@ -44,7 +55,9 @@ export class CompanyDashboard extends Component{
               <hr/>
               <Link to="viewstudent"><FlatButton label="View Student" primary={true} /></Link>
               <hr/>
-              <Link to="signin"><FlatButton label="SignOut"  primary={true} /></Link>
+              <FlatButton 
+              onClick={this.logout.bind(this)} 
+              label="SignOut"  primary={true} />
               {/*<FlatButton label="SignOut" onClick={this.changeRoute.bind(this)} primary={true} />*/}
             </Paper>
           </div>  

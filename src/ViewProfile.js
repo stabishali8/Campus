@@ -24,6 +24,15 @@ export class ViewProfile extends Component{
                     description:''
             }
         }
+        logout(){
+            firebase.auth().signOut().catch(function(error){
+                console.log("error "+error.message);
+            }).then(()=>{
+            console.log("success");
+            this.props.history.push('/signin')
+            });
+        }
+        
         componentDidMount()
         {
             var userId = firebase.auth().currentUser.uid;
@@ -52,7 +61,9 @@ export class ViewProfile extends Component{
                             <div className="header">Campus Recruitment System
                         <Link to="/dashboard"><button>Dashboard</button>
                         </Link>
-                        <Link to="/signin"><button>Sign Out</button></Link>                                              
+                        <button
+                        onClick={this.logout.bind(this)}
+                        >Sign Out</button>                                              
                             </div>
                             <Paper style={style} zDepth={3}>
                                 <br/>
@@ -71,9 +82,10 @@ export class ViewProfile extends Component{
                                 primary={true} /></Link>
                                 <br/>
                                 <br/>
-                                <Link to="/signin"><RaisedButton 
-                                label="Sign Out"  
-                                primary={true} /></Link>
+                                <RaisedButton 
+                                label="Sign Out"
+                                onClick={this.logout.bind(this)}  
+                                primary={true} />
 
                             </Paper>
                         </div> 

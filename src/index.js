@@ -15,9 +15,12 @@ import {ViewCompany} from './ViewCompany';
 import {ViewStudent} from './ViewStudent';
 import {CompanyPostJob} from './CompanyPostJob';
 import {ViewPostJob} from './ViewPostJob';
-import {AdminStudentView} from './AdminStudentView';
-import {AdminCompanyView} from './AdminCompanyView';
-import {AdminJobView} from './AdminJobView';
+// import {AdminStudentView} from './AdminStudentView';
+// import {AdminCompanyView} from './AdminCompanyView';
+// import {AdminJobView} from './AdminJobView';
+import {ExampleJobView} from './ExampleJobView';
+import {ExampleCompanyView} from './ExampleCompanyView';
+import {ExampleStudentView} from './ExampleStudentView';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, } from 'react-router-dom';
@@ -50,9 +53,12 @@ ReactDOM.render(
             <Route path="/viewstudent" component={ViewStudent}/>
             <Route path="/companypostjob" component={CompanyPostJob}/>
             <Route path="/viewpostjob" component={ViewPostJob}/>
-            <Route path="/adminstudentview" component={AdminStudentView}/>
+            {/*<Route path="/adminstudentview" component={AdminStudentView}/>
             <Route path="/admincompanyview" component={AdminCompanyView}/>
-            <Route path="/adminjobview" component={AdminJobView}/>
+            <Route path="/adminjobview" component={AdminJobView}/>*/}
+            <Route path="/examplejobview" component={ExampleJobView}/>
+            <Route path="/examplecompanyview" component={ExampleCompanyView}/>
+            <Route path="/examplestudentview" component={ExampleStudentView}/>
             <Route path="/viewjob" component={ViewJob}/>
             {/*<Route path="*" component={Whoops404}/>        */}
         </div>    

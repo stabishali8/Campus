@@ -47,12 +47,12 @@ export class SignUp extends Component{
       // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(errorCode + " " + errorMessage);
      
     }).then(()=>{
      
       var uid = firebase.auth().currentUser.uid;
-      firebase.database().ref('USER'+'/'+uid).set({
+      firebase.database().ref('USER/'+uid).set({
       name:this.state.username,
       email:this.state.email,
       password:this.state.password,
